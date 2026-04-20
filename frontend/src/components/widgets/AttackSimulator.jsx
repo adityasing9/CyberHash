@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { Terminal, PlayCircle, Upload } from 'lucide-react';
+import { Terminal, PlayCircle, Upload, Edit3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AttackSimulator() {
@@ -11,6 +11,8 @@ export default function AttackSimulator() {
   const [results, setResults] = useState(null);
   const [customWordlist, setCustomWordlist] = useState([]);
   const [wordlistName, setWordlistName] = useState('');
+  const [isManualEntryOpen, setIsManualEntryOpen] = useState(false);
+  const [manualWords, setManualWords] = useState('');
   const fileInputRef = useRef(null);
 
   const handleFileUpload = (e) => {
@@ -25,6 +27,15 @@ export default function AttackSimulator() {
       setCustomWordlist(words);
     };
     reader.readAsText(file);
+  };
+
+  const handleManualSave = () => {
+    const words = manualWords.split(/\r?\n/).map(w => w.trim()).filter(w => w.length > 0);
+    if (words.length > 0) {
+      setCustomWordlist(words);
+      setWordlistName('Manual Entry');
+      setIsManualEntryOpen(false);
+    }
   };
 
   const startSimulation = async () => {
@@ -128,21 +139,57 @@ export default function AttackSimulator() {
               )}
             </div>
             
-            <input 
-              type="file" 
-              ref={fileInputRef} 
-              hidden 
-              accept=".txt" 
-              onChange={handleFileUpload} 
-            />
-            <button 
-              onClick={() => fileInputRef.current.click()}
-              className="flex items-center gap-2 text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-md transition-colors"
-            >
-              <Upload className="w-3 h-3" />
-              Upload .txt Dictionary
-            </button>
+            <div className="flex gap-2">
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                hidden 
+                accept=".txt" 
+                onChange={handleFileUpload} 
+              />
+              <button 
+                onClick={() => {
+                  setIsManualEntryOpen(!isManualEntryOpen);
+                  if(!isManualEntryOpen) setManualWords(customWordlist.join('\n'));
+                }}
+                className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-md transition-colors border ${isManualEntryOpen ? 'bg-red-500/20 border-red-500/50' : 'bg-white/5 hover:bg-white/10 border-white/10'}`}
+              >
+                <Edit3 className="w-3 h-3" />
+                {isManualEntryOpen ? 'Close Editor' : 'Manual Entry'}
+              </button>
+              <button 
+                onClick={() => fileInputRef.current.click()}
+                className="flex items-center gap-2 text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Upload className="w-3 h-3" />
+                Upload .txt
+              </button>
+            </div>
           </div>
+
+          <AnimatePresence>
+            {isManualEntryOpen && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden space-y-2"
+              >
+                <textarea 
+                  className="w-full h-32 bg-black/40 border border-white/10 rounded-lg p-3 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-red-500 text-white/80 placeholder:text-white/20"
+                  placeholder="Enter words here (one per line)..."
+                  value={manualWords}
+                  onChange={(e) => setManualWords(e.target.value)}
+                />
+                <button 
+                  onClick={handleManualSave}
+                  className="w-full bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-500 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
+                >
+                  Save Wordlist
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Terminal Window */}
