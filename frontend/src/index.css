@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0B0F1A;
+  --color-card: rgba(255,255,255,0.05);
+  --color-border: rgba(255,255,255,0.1);
+  --color-primary: #6366F1;
+  --color-secondary: #A855F7;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-white antialiased selection:bg-primary/30;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card backdrop-blur-xl border border-border rounded-2xl shadow-xl overflow-hidden transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-white/20;
+    transform: translateY(-2px);
+  }
+
+  .primary-button {
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-white transition-all duration-300 transform;
+    background: linear-gradient(to right, #6366F1, #A855F7, #06b6d4);
+    background-size: 200% auto;
+  }
+
+  .primary-button:hover {
+    background-position: right center;
+    @apply shadow-[0_0_20px_rgba(99,102,241,0.5)] scale-[1.02];
+  }
+  
+  .primary-button:active {
+    @apply scale-[0.98];
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all duration-300;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
