@@ -2,11 +2,7 @@
   <img src="./banner.png" alt="CyberHash Banner" width="100%">
 </p>
 
-<h1 align="center">🟩 CyberHash</h1>
 
-<p align="center">
-  Tactical Cryptography Platform
-</p>
 
 <p align="center">
   🚀 Simulate Attacks • Analyze Security • Gain Intelligence
