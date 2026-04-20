@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/banner.png" alt="CyberHash Banner" width="100%">
+  <img src="./banner.png" alt="CyberHash Banner" width="100%">
 </p>
 
 <h1 align="center">🟩 CyberHash</h1>
