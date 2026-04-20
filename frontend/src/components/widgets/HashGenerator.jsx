@@ -13,7 +13,10 @@ export default function HashGenerator() {
     if (!password) return;
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/hash', { password });
+      const API = import.meta.env.VITE_API_URL;
+
+      const res = await axios.post(`${API}/hash`, { password });
+
       setHashes(res.data);
     } catch (err) {
       console.error(err);
@@ -35,7 +38,7 @@ export default function HashGenerator() {
           <span className="text-sm font-medium text-white/80">{label}</span>
           {badge && <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">{badge}</span>}
         </div>
-        <button 
+        <button
           onClick={() => copyToClipboard(value, type)}
           className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/50 hover:text-white"
           disabled={!value}
@@ -50,7 +53,7 @@ export default function HashGenerator() {
   );
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
       className="glass-card p-6"
     >
@@ -60,20 +63,20 @@ export default function HashGenerator() {
         </div>
         <h3 className="text-xl font-bold">Multi-Hash Generator</h3>
       </div>
-      
+
       <div className="space-y-4">
         <div>
           <label className="block text-xs text-white/50 mb-2 font-medium uppercase tracking-wider">Input Password</label>
           <div className="flex gap-3">
-            <input 
-              type="text" 
-              className="input-field" 
+            <input
+              type="text"
+              className="input-field"
               placeholder="e.g. s3cur3_p@ssw0rd"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && generateHashes()}
             />
-            <button 
+            <button
               onClick={generateHashes}
               disabled={loading || !password}
               className="primary-button whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
