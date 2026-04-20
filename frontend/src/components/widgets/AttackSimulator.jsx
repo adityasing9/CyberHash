@@ -45,20 +45,22 @@ export default function AttackSimulator() {
     setResults(null);
 
     try {
-      const payload = { 
+      const payload = {
         target_hash: targetHash,
         algorithm: algorithm,
         custom_wordlist: customWordlist.length > 0 ? customWordlist : undefined
       };
 
-      const res = await axios.post('http://localhost:5000/simulate-attack', payload);
-      
+      const API = import.meta.env.VITE_API_URL;
+
+      const res = await axios.post(`${API}/simulate-attack`, payload);
+
       const serverLogs = res.data.log;
-      
+
       serverLogs.forEach((logItem, index) => {
         setTimeout(() => {
           setLogs(prev => [...prev, logItem]);
-          
+
           if (index === serverLogs.length - 1) {
             setIsSimulating(false);
             setResults({
@@ -78,7 +80,7 @@ export default function AttackSimulator() {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
       className="glass-card p-6 border-red-500/20"
       style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(239,68,68,0.05) 100%)' }}
@@ -90,8 +92,8 @@ export default function AttackSimulator() {
           </div>
           <h3 className="text-xl font-bold">Live Attack Simulator</h3>
         </div>
-        
-        <select 
+
+        <select
           className="bg-black/40 border border-white/10 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-primary font-bold shadow-[0_0_10px_rgba(52,211,153,0.2)]"
           value={algorithm}
           onChange={(e) => setAlgorithm(e.target.value)}
@@ -113,14 +115,14 @@ export default function AttackSimulator() {
       <div className="space-y-4">
         <div className="flex flex-col gap-3">
           <div className="flex gap-3">
-            <input 
-              type="text" 
-              className="input-field border-red-500/20 focus:ring-red-500/50 flex-1" 
+            <input
+              type="text"
+              className="input-field border-red-500/20 focus:ring-red-500/50 flex-1"
               placeholder="Paste target hash..."
               value={targetHash}
               onChange={(e) => setTargetHash(e.target.value)}
             />
-            <button 
+            <button
               onClick={startSimulation}
               disabled={isSimulating || !targetHash}
               className="flex items-center gap-2 whitespace-nowrap bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
@@ -138,26 +140,26 @@ export default function AttackSimulator() {
                 <span>Using Default Top-100 Weak Passwords</span>
               )}
             </div>
-            
+
             <div className="flex gap-2">
-              <input 
-                type="file" 
-                ref={fileInputRef} 
-                hidden 
-                accept=".txt" 
-                onChange={handleFileUpload} 
+              <input
+                type="file"
+                ref={fileInputRef}
+                hidden
+                accept=".txt"
+                onChange={handleFileUpload}
               />
-              <button 
+              <button
                 onClick={() => {
                   setIsManualEntryOpen(!isManualEntryOpen);
-                  if(!isManualEntryOpen) setManualWords(customWordlist.join('\n'));
+                  if (!isManualEntryOpen) setManualWords(customWordlist.join('\n'));
                 }}
                 className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-md transition-colors border ${isManualEntryOpen ? 'bg-red-500/20 border-red-500/50' : 'bg-white/5 hover:bg-white/10 border-white/10'}`}
               >
                 <Edit3 className="w-3 h-3" />
                 {isManualEntryOpen ? 'Close Editor' : 'Manual Entry'}
               </button>
-              <button 
+              <button
                 onClick={() => fileInputRef.current.click()}
                 className="flex items-center gap-2 text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-md transition-colors"
               >
@@ -169,19 +171,19 @@ export default function AttackSimulator() {
 
           <AnimatePresence>
             {isManualEntryOpen && (
-              <motion.div 
+              <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden space-y-2"
               >
-                <textarea 
+                <textarea
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-lg p-3 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-red-500 text-white/80 placeholder:text-white/20"
                   placeholder="Enter words here (one per line)..."
                   value={manualWords}
                   onChange={(e) => setManualWords(e.target.value)}
                 />
-                <button 
+                <button
                   onClick={handleManualSave}
                   className="w-full bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-500 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
                 >
@@ -199,14 +201,14 @@ export default function AttackSimulator() {
             <span className="text-[10px] bg-primary/10 px-2 py-0.5 rounded border border-primary/20">SECURE ENCLAVE</span>
           </div>
           <div className="text-primary/30 mb-4">(c) 2026. All operations are logged. Encryption active.</div>
-          
+
           <div className="space-y-1">
             <div className="text-yellow-400">&gt; Starting dictionary attack against hash...</div>
             <AnimatePresence>
               {logs.map((log, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: -10 }} 
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   className="flex justify-between items-center bg-white/5 rounded px-2 py-1 my-1"
                 >
@@ -222,20 +224,20 @@ export default function AttackSimulator() {
                 </motion.div>
               ))}
             </AnimatePresence>
-            
+
             {logs.length > 0 && isSimulating && (
               <motion.div animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="pl-1">_</motion.div>
             )}
 
             {results && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 className={`mt-4 p-3 rounded-lg border ${results.cracked ? 'bg-red-500/20 border-red-500/50 text-red-200' : 'bg-green-500/20 border-green-500/50 text-green-200'}`}
               >
                 {results.cracked ? (
                   <div>
                     <strong className="block text-red-500 text-lg mb-1">CRITICAL VULNERABILITY!</strong>
-                    Hash cracked! {results.detectedAlgorithm && <span className="text-blue-400 font-bold uppercase">[Detected {results.detectedAlgorithm}]</span>}<br/>
+                    Hash cracked! {results.detectedAlgorithm && <span className="text-blue-400 font-bold uppercase">[Detected {results.detectedAlgorithm}]</span>}<br />
                     <span className="text-white bg-black/50 px-2 py-1 inline-block mt-2 rounded border border-red-500/30">
                       Plaintext Password: <strong className="text-green-400">{results.crackedPassword}</strong>
                     </span>
