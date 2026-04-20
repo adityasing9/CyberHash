@@ -20,7 +20,17 @@
 
 ## 🌍 Live Demo
 
-👉 https://your-live-url.vercel.app
+<p align="center">
+  <img src="https://img.shields.io/badge/API-Live-00C853?style=for-the-badge">
+</p>
+
+### 🔹 Frontend
+👉 https://your-frontend.vercel.app
+
+### 🔹 Backend API
+👉 https://cyberhash-js9b.onrender.com
+
+⚠️ Note: Backend may take a few seconds to wake up (Render free tier).
 
 ---
 
