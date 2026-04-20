@@ -47,9 +47,7 @@ Generate hashes across:
 * BLAKE2 / BLAKE3
 * bcrypt, Argon2id, scrypt
 
-### 📊 Performance Benchmarking
 
-Visualize algorithm performance and understand the tradeoff between speed and security.
 
 ### 🧪 Argon2 Tuning Lab
 
