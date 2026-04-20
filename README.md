@@ -36,10 +36,11 @@
 
 ## 🖥️ Preview
 
-<p align="center">
-  <img src="./assets/dashboard.png" width="45%">
-  <img src="./assets/attack.png" width="45%">
-</p>
+### 🔐 Hash Generator
+<img src="./generator.png" width="80%">
+
+### 💥 Attack Simulator
+<img src="./cracker.png" width="80%">
 
 ---
 
