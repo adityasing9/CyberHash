@@ -6,15 +6,15 @@ import { motion } from 'framer-motion';
 
 export default function PerformanceChart() {
   const [data, setData] = useState([
-    { name: 'SHA-256', time: 0, color: '#f87171' },
-    { name: 'SHA-384', time: 0, color: '#f87171' },
-    { name: 'SHA-512', time: 0, color: '#f87171' },
-    { name: 'SHA-3', time: 0, color: '#f87171' },
-    { name: 'BLAKE2', time: 0, color: '#f87171' },
-    { name: 'BLAKE3', time: 0, color: '#f87171' },
-    { name: 'bcrypt', time: 0, color: '#fbbf24' },
-    { name: 'Argon2', time: 0, color: '#34d399' },
-    { name: 'scrypt', time: 0, color: '#34d399' }
+    { name: 'SHA-256', time: 0, color: '#004B23' },
+    { name: 'SHA-384', time: 0, color: '#006400' },
+    { name: 'SHA-512', time: 0, color: '#007200' },
+    { name: 'SHA-3', time: 0, color: '#008000' },
+    { name: 'BLAKE2', time: 0, color: '#38B000' },
+    { name: 'BLAKE3', time: 0, color: '#70E000' },
+    { name: 'bcrypt', time: 0, color: '#9EF01A' },
+    { name: 'Argon2', time: 0, color: '#CCFF33' },
+    { name: 'scrypt', time: 0, color: '#39FF14' }
   ]);
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
@@ -26,15 +26,15 @@ export default function PerformanceChart() {
       const res = await axios.post('http://localhost:5000/compare', { password });
       
       setData([
-        { name: 'SHA-256', time: res.data.sha256, color: '#f87171' },
-        { name: 'SHA-384', time: res.data.sha384, color: '#f87171' },
-        { name: 'SHA-512', time: res.data.sha512, color: '#f87171' },
-        { name: 'SHA-3', time: res.data.sha3_256, color: '#f87171' },
-        { name: 'BLAKE2', time: res.data.blake2, color: '#f87171' },
-        { name: 'BLAKE3', time: res.data.blake3, color: '#f87171' },
-        { name: 'bcrypt', time: res.data.bcrypt, color: '#fbbf24' },
-        { name: 'Argon2', time: res.data.argon2, color: '#34d399' },
-        { name: 'scrypt', time: res.data.scrypt, color: '#34d399' }
+        { name: 'SHA-256', time: res.data.sha256, color: '#004B23' },
+        { name: 'SHA-384', time: res.data.sha384, color: '#006400' },
+        { name: 'SHA-512', time: res.data.sha512, color: '#007200' },
+        { name: 'SHA-3', time: res.data.sha3_256, color: '#008000' },
+        { name: 'BLAKE2', time: res.data.blake2, color: '#38B000' },
+        { name: 'BLAKE3', time: res.data.blake3, color: '#70E000' },
+        { name: 'bcrypt', time: res.data.bcrypt, color: '#9EF01A' },
+        { name: 'Argon2', time: res.data.argon2, color: '#CCFF33' },
+        { name: 'scrypt', time: res.data.scrypt, color: '#39FF14' }
       ]);
     } catch (err) {
       console.error(err);

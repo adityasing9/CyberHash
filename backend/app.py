@@ -332,7 +332,7 @@ def analyze_password():
 
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({"status": "HashLab Pro API is running"}), 200
+    return jsonify({"status": "Cyber Hash API is running"}), 200
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

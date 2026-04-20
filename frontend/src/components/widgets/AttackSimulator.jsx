@@ -193,9 +193,12 @@ export default function AttackSimulator() {
         </div>
 
         {/* Terminal Window */}
-        <div className="bg-black/80 rounded-xl p-4 font-mono text-sm h-64 overflow-y-auto border border-white/10 shadow-inner">
-          <div className="text-green-500 mb-2">HashLab OS [Version 1.0.0]</div>
-          <div className="text-white/50 mb-4">(c) HashLab Corporation. All rights reserved.</div>
+        <div className="bg-black/90 rounded-xl p-4 font-mono text-sm h-64 overflow-y-auto border border-primary/20 shadow-[inset_0_0_20px_rgba(57,255,20,0.05)] custom-scrollbar">
+          <div className="text-primary mb-2 flex items-center justify-between">
+            <span>CYBER HASH Terminal [v4.0.2]</span>
+            <span className="text-[10px] bg-primary/10 px-2 py-0.5 rounded border border-primary/20">SECURE ENCLAVE</span>
+          </div>
+          <div className="text-primary/30 mb-4">(c) 2026. All operations are logged. Encryption active.</div>
           
           <div className="space-y-1">
             <div className="text-yellow-400">&gt; Starting dictionary attack against hash...</div>

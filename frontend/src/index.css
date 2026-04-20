@@ -1,17 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0B0F1A;
-  --color-card: rgba(255,255,255,0.05);
-  --color-border: rgba(255,255,255,0.1);
-  --color-primary: #6366F1;
-  --color-secondary: #A855F7;
+  --color-background: #050805;
+  --color-card: rgba(10, 20, 10, 0.4);
+  --color-border: rgba(0, 255, 65, 0.1);
+  --color-primary: #39FF14;
+  --color-secondary: #00FF41;
+  --color-accent: #0D3B0D;
 }
 
 @layer base {
   body {
-    @apply bg-background text-white antialiased selection:bg-primary/30;
+    @apply bg-background text-emerald-50 antialiased selection:bg-primary/30;
     font-family: 'Inter', system-ui, sans-serif;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 100%),
+      linear-gradient(rgba(0, 255, 65, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
   }
 }
 
@@ -26,14 +32,14 @@
   }
 
   .primary-button {
-    @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-white transition-all duration-300 transform;
-    background: linear-gradient(to right, #6366F1, #A855F7, #06b6d4);
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-black transition-all duration-300 transform;
+    background: linear-gradient(to right, #39FF14, #00FF41);
     background-size: 200% auto;
   }
 
   .primary-button:hover {
     background-position: right center;
-    @apply shadow-[0_0_20px_rgba(99,102,241,0.5)] scale-[1.02];
+    @apply shadow-[0_0_25px_rgba(0,255,65,0.6)] scale-[1.02];
   }
   
   .primary-button:active {

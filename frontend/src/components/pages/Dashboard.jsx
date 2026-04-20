@@ -15,12 +15,12 @@ export default function Dashboard() {
           
           {/* Logo Section */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-              <Shield className="text-white w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_0_15px_rgba(57,255,20,0.3)] border border-primary/20">
+              <Shield className="text-black w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">HashLab Pro</h1>
-              <p className="text-xs text-white/50 hidden sm:block">Security Intelligence</p>
+              <h1 className="text-xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">CYBER HASH</h1>
+              <p className="text-[10px] text-primary/40 font-bold tracking-[0.2em] uppercase hidden sm:block">Tactical Intelligence</p>
             </div>
           </div>
 
