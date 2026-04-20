@@ -37,10 +37,10 @@
 ## 🖥️ Preview
 
 ### 🔐 Hash Generator
-<img src="./generator.png" width="80%">
+<img src="./generator.png" width="100%">
 
 ### 💥 Attack Simulator
-<img src="./cracker.png" width="80%">
+<img src="./cracker.png" width="100%">
 
 ---
 
