@@ -24,6 +24,7 @@ WEAK_PASSWORDS = [
     "dragon",
     "admin",
     "iloveyou",
+    "pass1234",
     "welcome",
     "monkey",
 ]
