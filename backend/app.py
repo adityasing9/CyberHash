@@ -19,6 +19,7 @@ WEAK_PASSWORDS = [
     "12345",
     "123456789",
     "football",
+    "Password",
     "1234",
     "test",
     "dragon",
